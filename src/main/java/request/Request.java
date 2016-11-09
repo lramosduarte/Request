@@ -2,6 +2,7 @@ package main.java.request;
 
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
+import java.net.ProtocolException;
 import java.net.URL;
 
 /**
@@ -13,12 +14,21 @@ public class Request {
     private URL url;
     private HttpURLConnection request;
 
-    public Request(String url) {
+    public Request(String url, String metodo) {
         this.url = checkUrl(url);
+        try {
+            request.setRequestMethod(metodo);
+        } catch (ProtocolException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        request.setRequestProperty("User-Agent", getUserAgent());
+        request.setRequestProperty("Accept-Language", "en-US,en;q=0.5");
     }
 
-    public Request(String url, String userAgent) {
-        this(url);
+    public Request(String url, String metodo, String userAgent) {
+        this(url, metodo);
         this.userAgent = userAgent;
     }
 
