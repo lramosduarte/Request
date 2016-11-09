@@ -9,12 +9,25 @@ import java.net.URL;
  */
 public class Request {
 
-    private final String USER_AGENT = "SimpleRequest/1.0";
+    private String userAgent = "SimpleRequest/1.0";
     private URL url;
     private HttpURLConnection request;
 
     public Request(String url) {
         this.url = checkUrl(url);
+    }
+
+    public Request(String url, String userAgent) {
+        this(url);
+        this.userAgent = userAgent;
+    }
+
+    public String getUserAgent() {
+        return this.userAgent;
+    }
+
+    public void setUserAgent(String userAgent) {
+        this.userAgent = userAgent;
     }
 
     public URL checkUrl(String url) {
