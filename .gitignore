@@ -2,3 +2,7 @@
 Request.iml
 build/
 .gradle/
+gradle/
+gradlew
+gradlew.bat
+
