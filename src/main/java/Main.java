@@ -1,5 +1,3 @@
-package main.java;
-
 /**
  * Created by sisqualis on 09/11/16.
  */

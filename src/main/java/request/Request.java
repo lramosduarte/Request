@@ -1,4 +1,4 @@
-package main.java.request;
+package request;
 
 import java.io.*;
 import java.net.HttpURLConnection;
@@ -6,7 +6,6 @@ import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 
 /**
  * Created by sisqualis on 09/11/16.
