@@ -1,4 +1,4 @@
-package main.java.request;
+package request;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
@@ -12,10 +12,11 @@ public class QueryString {
     public String getQueryParams(HashMap<String, String> parametros) {
         StringBuilder queryString = new StringBuilder();
         for (HashMap.Entry<String, String> parametro : parametros.entrySet()) {
-            if (parametro != parametros.keySet().toArray()[0])
+            if (parametro.getKey() != parametros.keySet().toArray()[0])
                 queryString.append("&");
             try {
                 queryString.append(URLEncoder.encode(parametro.getKey(), "UTF-8"));
+                queryString.append("=");
                 queryString.append(URLEncoder.encode(parametro.getValue(), "UTF-8"));
             } catch (UnsupportedEncodingException e) {
                 e.printStackTrace();
