@@ -29,6 +29,15 @@ public class Request {
         request.setRequestProperty("Accept-Language", "en-US,en;q=0.5");
     }
 
+    public Request(String url) {
+        this(url, "GET");
+    }
+
+    public Request(String url, String metodo, String userAgent) {
+        this(url, metodo);
+        this.userAgent = userAgent;
+    }
+
     public void setParametros(HashMap<String, String> parametros) throws IOException {
         OutputStream stream = request.getOutputStream();
         BufferedWriter writer = new BufferedWriter(
@@ -36,11 +45,6 @@ public class Request {
         writer.write(new QueryString().getQueryParams(parametros));
         writer.flush();
         stream.close();
-    }
-
-    public Request(String url, String metodo, String userAgent) {
-        this(url, metodo);
-        this.userAgent = userAgent;
     }
 
     public String getUserAgent() {
