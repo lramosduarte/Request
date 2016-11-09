@@ -5,6 +5,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 
 /**
@@ -29,7 +30,7 @@ public class Request {
         request.setRequestProperty("Accept-Language", "en-US,en;q=0.5");
     }
 
-    public void setParametros(LinkedHashMap<String, String> parametros) throws IOException {
+    public void setParametros(HashMap<String, String> parametros) throws IOException {
         OutputStream stream = request.getOutputStream();
         BufferedWriter writer = new BufferedWriter(
                 new OutputStreamWriter(stream, "UTF-8"));
