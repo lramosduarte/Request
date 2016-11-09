@@ -6,3 +6,11 @@ jar {
         attributes 'Main-Class': 'main.java.Main'
     }
 }
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testCompile 'junit:junit:4.12'
+}
