@@ -1,2 +1,4 @@
 .idea/
 Request.iml
+build/
+.gradle/
