@@ -15,8 +15,8 @@ public class Request {
     private String userAgent = "SimpleRequest/1.0";
     private URL url;
     private HttpURLConnection request;
-    private String responseMessage;
-    private int responseCode;
+    public String responseMessage;
+    public int responseCode;
 
     public Request(String url, String metodo) {
         this.url = checkUrl(url);
@@ -28,6 +28,8 @@ public class Request {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        this.request.setRequestProperty("User-Agent", getUserAgent());
+        this.request.setRequestProperty("Accept-Language", "en-US,en;q=0.5");
     }
 
     public Request(String url) {
@@ -36,13 +38,13 @@ public class Request {
 
     public Request(String url, String metodo, String userAgent) {
         this(url, metodo);
-        this.userAgent = userAgent;
+        setUserAgent(userAgent);
     }
 
     public void setParametros(HashMap<String, String> parametros) throws IOException {
+        this.request.setDoOutput(true);
         OutputStream stream = request.getOutputStream();
-        BufferedWriter writer = new BufferedWriter(
-                new OutputStreamWriter(stream, "UTF-8"));
+        BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(stream, "UTF-8"));
         writer.write(new QueryString().getQueryParams(parametros));
         writer.flush();
         stream.close();
@@ -65,8 +67,6 @@ public class Request {
     }
 
     public String send() throws IOException {
-        this.request.setRequestProperty("User-Agent", getUserAgent());
-        this.request.setRequestProperty("Accept-Language", "en-US,en;q=0.5");
         return getResponse();
     }
 
@@ -75,8 +75,6 @@ public class Request {
                 new InputStreamReader(request.getInputStream(), "ISO-8859-1")
         );
         StringBuffer response = new StringBuffer();
-        responseCode = request.getResponseCode();
-        responseMessage = request.getResponseMessage();
         String linha;
         while ((linha= reader.readLine()) != null) {
             response.append(linha);
