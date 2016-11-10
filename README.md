@@ -2,4 +2,16 @@
 
 Maneira simples de fazer request no java.
 
-ainda vou fazer o readme.
+Exemplo de uso:
+
+    import request.Request;
+    import java.io.IOException;
+
+    public class Main {
+
+        public static void main(String[] args) throws IOException {
+            String response = new Request("http://104.196.145.212:4567/cidades/1").send();
+        }
+        
+    }
+
