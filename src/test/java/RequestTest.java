@@ -22,7 +22,7 @@ public class RequestTest {
         Request request = new Request(url);
         String resposta = request.send();
         Assert.assertNotNull(resposta);
-        Assert.assertEquals("200", request.responseCode);
+        Assert.assertEquals(200, request.responseCode);
         Assert.assertEquals("OK", request.responseMessage);
         Assert.assertTrue(resposta.contains("Fazer login"));
     }

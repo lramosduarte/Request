@@ -67,6 +67,8 @@ public class Request {
     }
 
     public String send() throws IOException {
+        this.responseMessage = this.request.getResponseMessage();
+        this.responseCode = this.request.getResponseCode();
         return getResponse();
     }
 
