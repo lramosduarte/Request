@@ -10,7 +10,7 @@ Exemplo de uso:
     public class Main {
 
         public static void main(String[] args) throws IOException {
-            String response = new Request("http://104.196.145.212:4567/cidades/1").send();
+            String response = new Request("http://www.google.com.br").send();
         }
         
     }
