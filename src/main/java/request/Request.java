@@ -15,18 +15,19 @@ public class Request {
     private String userAgent = "SimpleRequest/1.0";
     private URL url;
     private HttpURLConnection request;
+    private String responseMessage;
+    private int responseCode;
 
     public Request(String url, String metodo) {
         this.url = checkUrl(url);
         try {
+            request = (HttpURLConnection) this.url.openConnection();
             request.setRequestMethod(metodo);
         } catch (ProtocolException e) {
             e.printStackTrace();
-        } catch (Exception e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
-        request.setRequestProperty("User-Agent", getUserAgent());
-        request.setRequestProperty("Accept-Language", "en-US,en;q=0.5");
     }
 
     public Request(String url) {
@@ -55,12 +56,32 @@ public class Request {
         this.userAgent = userAgent;
     }
 
-    public URL checkUrl(String url) {
+    private URL checkUrl(String url) {
         try {
             return new URL(url);
         } catch (MalformedURLException ex) {
             return null;
         }
+    }
+
+    public String send() throws IOException {
+        this.request.setRequestProperty("User-Agent", getUserAgent());
+        this.request.setRequestProperty("Accept-Language", "en-US,en;q=0.5");
+        return getResponse();
+    }
+
+    private String getResponse() throws IOException {
+        BufferedReader reader = new BufferedReader(
+                new InputStreamReader(request.getInputStream(), "ISO-8859-1")
+        );
+        StringBuffer response = new StringBuffer();
+        responseCode = request.getResponseCode();
+        responseMessage = request.getResponseMessage();
+        String linha;
+        while ((linha= reader.readLine()) != null) {
+            response.append(linha);
+        }
+        return response.toString();
     }
 
 }
